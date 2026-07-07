@@ -624,6 +624,20 @@ void BrowserClient::OnLoadEnd(CefRefPtr<CefBrowser>, CefRefPtr<CefFrame> frame, 
 
 		frame->ExecuteJavaScript(script, "", 0);
 	}
+
+	if (frame->IsMain() && bs->js.length()) {
+		frame->ExecuteJavaScript(bs->js, frame->GetURL(), 0);
+	}
+}
+
+bool BrowserClient::OnConsoleMessage(CefRefPtr<CefBrowser>, cef_log_severity_t level, const CefString &message,
+				     const CefString &source, int line)
+			  "decodeURIComponent(\"" +
+			  uriEncodedCSS + "\")));";
+		script += "document.querySelector('head').appendChild(obsCSS);";
+
+		frame->ExecuteJavaScript(script, "", 0);
+	}
 }
 
 bool BrowserClient::OnConsoleMessage(CefRefPtr<CefBrowser>, cef_log_severity_t level, const CefString &message,
